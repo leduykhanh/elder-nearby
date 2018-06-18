@@ -14,8 +14,8 @@ process.noDeprecation = true;
 module.exports = (options) => ({
   entry: options.entry,
   node: {
-   fs: "empty"
- },
+    fs: 'empty',
+  },
   output: Object.assign({ // Compile into js/build.js
     path: path.resolve(process.cwd(), 'build'),
     publicPath: '/',
@@ -51,9 +51,9 @@ module.exports = (options) => ({
             loader: 'style-loader', // creates style nodes from JS strings
           }, {
             loader: 'css-loader', // translates CSS into CommonJS
-          },{
-          loader: 'sass-loader', // compiles Sass to CSS
-        }],
+          }, {
+            loader: 'sass-loader', // compiles Sass to CSS
+          }],
       },
       {
         test: /\.(eot|svg|otf|ttf|woff|woff2)$/,

@@ -14,7 +14,7 @@ import {
 export function loadData(callback) {
   return {
     type: LOAD_DATA,
-    callback
+    callback,
   };
 }
 
@@ -22,7 +22,7 @@ export function addMessages(payload, callback) {
   return {
     type: NEW_DATA,
     payload,
-    callback
+    callback,
   };
 }
 

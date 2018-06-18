@@ -10,79 +10,87 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import cookie from 'react-cookies';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+import { createStructuredSelector } from 'reselect';
+
+import MessageComponent from 'components/MessageComponent';
 
 import reducer from './reducer';
 import saga from './saga';
 import { loadData, addMessages } from './actions';
 
-import { createStructuredSelector } from 'reselect';
-import makeSelectLogin from 'containers/Login/selectors';
 import makeSelectData from './selectors';
 import splitMessage from './splitmessage';
-import Dropdowns from 'components/Dropdowns';
 
-
- export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  state = {
-    text: "",
-    shortened: null,
+export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor() {
+    super();
+    this.send = this.send.bind(this);
   }
-  componentWillMount(){
+
+  state = {
+    text: 'aaa bbb ccc ddd eee fff',
+  }
+
+  componentWillMount() {
     this.props.dispatch(loadData());
   }
 
-  redirect(data){
+  redirect(data) {
     window.location.assign(data.url);
   }
 
-  send(){
-    if (this.state.text.length == 0 || this.state.text.length > 500)
-      return alert("please enter text");
-    let messages = splitMessage(this.state.text);
+  send() {
+    if (this.state.text.length === 0 || this.state.text.length > 500) {
+      return alert('please enter text');
+    }
+    const messages = splitMessage(this.state.text);
     this.props.dispatch(addMessages({ messages }, this.handleData.bind(this)));
+    return true;
   }
 
-  handleData(data){
-    this.setState({shortened: data.shortened});
+  handleData() {
+    this.setState({ text: '' });
   }
 
   render() {
     return (
       <div>
-          <h1>Tweet hi ya!</h1>
-          <div className="row">
-            <div className="border padding-10 col-sm-6 offset-sm-3">
+        <h1>Tweet hi ya!</h1>
+        <div className="row">
+          <div className="border padding-10 col-sm-6 offset-sm-3">
             <div className="form-group">
-              <label>start tweeting</label>
-              <input onChange={(e) => this.setState({text:e.target.value})}
-                type="text" className="form-control" placeholder="hahahah" />
+              <label htmlFor="message-box">Start tweeting</label>
+              <textarea
+                onChange={(e) => this.setState({ text: e.target.value })}
+                type="text"
+                className="form-control"
+                placeholder={this.state.text}
+                id="message-box"
+              >
+              </textarea>
             </div>
+            <div className="text-right">
+              <button type="button" className="btn btn-info" onClick={this.send}>
+                Send
+              </button>
+            </div>
+            <hr />
             <div>
-            </div>
-              <div className="text-right">
-                <button type="button" className="btn btn-info" onClick={this.send.bind(this)}>
-                  Send
-                </button>
-              </div>
+              {
+                this.props.data.data && this.props.data.data.map(
+                  (item) => <MessageComponent item={item} />
+                )
+              }
             </div>
           </div>
-          <div>
-            {
-              this.props.data.data && this.props.data.data.map(
-                (item, index) => <div key={index} className="row">{item.text}</div>
-              )
-            }
-          </div>
+        </div>
       </div>
     );
   }
@@ -90,9 +98,9 @@ import Dropdowns from 'components/Dropdowns';
 
 HomePage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  data: PropTypes.data,
 };
 const mapStateToProps = createStructuredSelector({
-  login: makeSelectLogin(),
   data: makeSelectData(),
 });
 
@@ -109,6 +117,4 @@ const withSaga = injectSaga({ key: 'home', saga });
 export default compose(
   withReducer,
   withSaga,
-  withConnect, ) (withRouter(HomePage));
-
-// export default HomePage;
+  withConnect)(withRouter(HomePage));

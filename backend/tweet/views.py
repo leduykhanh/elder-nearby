@@ -10,14 +10,14 @@ def index(request):
     return HttpResponse("home")
 
 def data(request):
-    data_list = Message.objects.order_by('-time_added')
+    data_list = Message.objects.order_by('-time_added')[:10]
     return JsonResponse({'data':MessageSerializzer(data_list, many=True).data})
 
 @csrf_exempt
 def add_message(request):
     data = json.loads(request.body.decode('utf-8'))
-    for message in data.get("messages"):
+    for message in reversed(data.get("messages")):
         m = Message(text=message)
         m.save()
-    data_list = Message.objects.order_by('-time_added')
+    data_list = Message.objects.order_by('-time_added')[:10]
     return JsonResponse({'data':MessageSerializzer(data_list, many=True).data})

@@ -27,7 +27,6 @@ function checkStatus(response) {
   }
 
   const error = new Error(response.statusText);
-  console.log("response", response);
   error.response = response;
   throw error;
 }

@@ -46,7 +46,6 @@ import { translationMessages } from './i18n';
 import './global-styles';
 
 // Create redux store with history
-import { CookiesProvider } from 'react-cookie';
 
 const initialState = {};
 const history = createHistory();
@@ -56,15 +55,11 @@ const MOUNT_NODE = document.getElementById('app');
 const render = (messages) => {
   ReactDOM.render(
     <Provider store={store}>
-      <CookiesProvider>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-
-            <App />
-
+          <App />
         </ConnectedRouter>
       </LanguageProvider>
-      </CookiesProvider>
     </Provider>,
     MOUNT_NODE
   );

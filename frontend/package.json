@@ -1,7 +1,7 @@
 {
-  "name": "urbanfox-test",
+  "name": "zalora-test",
   "version": "1.0.0",
-  "description": "Url shortener app",
+  "description": "Tweet app",
   "engines": {
     "npm": ">=3",
     "node": ">=5"
@@ -31,7 +31,7 @@
     "clean:all": "npm run analyze:clean && npm run test:clean && npm run build:clean",
     "generate": "plop --plopfile internals/generators/index.js",
     "lint": "npm run lint:js",
-    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
+    "lint:eslint": "eslint --ignore-path ../.gitignore --ignore-pattern internals/scripts",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
     "pretest": "npm run test:clean && npm run lint",
@@ -108,6 +108,9 @@
         "as-needed"
       ],
       "class-methods-use-this": 0,
+      "array-callback-return": 0,
+      "no-plusplus": 0,
+      "no-unused-expressions": 0,
       "comma-dangle": [
         2,
         "always-multiline"
@@ -223,6 +226,7 @@
     "ip": "1.1.5",
     "lodash": "4.17.4",
     "minimist": "1.2.0",
+    "moment": "^2.22.2",
     "node-sass": "^4.9.0",
     "prop-types": "15.5.10",
     "react": "15.6.1",
