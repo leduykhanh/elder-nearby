@@ -4,7 +4,8 @@ import { dataLoaded, dataLoadingError } from 'containers/HomePage/actions';
 
 import request from 'utils/request';
 
-const BASE_URL = 'http://localhost:8000';
+// const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'http://206.189.40.141:8000';
 
 export function* getData(action) {
   const requestURL = `${BASE_URL}/tweet/data`;
