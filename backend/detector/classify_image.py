@@ -146,8 +146,8 @@ def run_inference_on_image(image):
   Returns:
     Nothing
   """
-  if not tf.gfile.Exists(image):
-    tf.logging.fatal('File does not exist %s', image)
+  # if not tf.gfile.Exists(image):
+  #   tf.logging.fatal('File does not exist %s', image)
   # image_data = tf.gfile.FastGFile(image, 'rb').read()
   image_data= image
 
@@ -194,52 +194,52 @@ def maybe_download_and_extract():
           filename, float(count * block_size) / float(total_size) * 100.0))
       sys.stdout.flush()
     filepath, _ = urllib.request.urlretrieve(DATA_URL, filepath, _progress)
-    print()
+    # print()
     statinfo = os.stat(filepath)
-    print('Successfully downloaded', filename, statinfo.st_size, 'bytes.')
+    # print('Successfully downloaded', filename, statinfo.st_size, 'bytes.')
   tarfile.open(filepath, 'r:gz').extractall(dest_directory)
 
 
-def main(_):
-  maybe_download_and_extract()
-  image = (FLAGS.image_file if FLAGS.image_file else
-           os.path.join(FLAGS.model_dir, 'cropped_panda.jpg'))
-  run_inference_on_image(image)
+# def main(_):
+#   maybe_download_and_extract()
+#   image = (FLAGS.image_file if FLAGS.image_file else
+#            os.path.join(FLAGS.model_dir, 'cropped_panda.jpg'))
+#   run_inference_on_image(image)
 
 def predicts(image):
-  maybe_download_and_extract()
+  #maybe_download_and_extract()
   return (run_inference_on_image(image))
 
-if __name__ == '__main__':
-  parser = argparse.ArgumentParser()
-  # classify_image_graph_def.pb:
-  #   Binary representation of the GraphDef protocol buffer.
-  # imagenet_synset_to_human_label_map.txt:
-  #   Map from synset ID to a human readable string.
-  # imagenet_2012_challenge_label_map_proto.pbtxt:
-  #   Text representation of a protocol buffer mapping a label to synset ID.
-
-  parser.add_argument(
-      '--model_dir',
-      type=str,
-      default='/tmp/imagenet',
-      help="""\
-      Path to classify_image_graph_def.pb,
-      imagenet_synset_to_human_label_map.txt, and
-      imagenet_2012_challenge_label_map_proto.pbtxt.\
-      """
-  )
-  parser.add_argument(
-      '--image_file',
-      type=str,
-      default='',
-      help='Absolute path to image file.'
-  )
-  parser.add_argument(
-      '--num_top_predictions',
-      type=int,
-      default=5,
-      help='Display this many predictions.'
-  )
-  FLAGS, unparsed = parser.parse_known_args()
+# if __name__ == '__main__':
+#   parser = argparse.ArgumentParser()
+#   # classify_image_graph_def.pb:
+#   #   Binary representation of the GraphDef protocol buffer.
+#   # imagenet_synset_to_human_label_map.txt:
+#   #   Map from synset ID to a human readable string.
+#   # imagenet_2012_challenge_label_map_proto.pbtxt:
+#   #   Text representation of a protocol buffer mapping a label to synset ID.
+#
+#   parser.add_argument(
+#       '--model_dir',
+#       type=str,
+#       default='/tmp/imagenet',
+#       help="""\
+#       Path to classify_image_graph_def.pb,
+#       imagenet_synset_to_human_label_map.txt, and
+#       imagenet_2012_challenge_label_map_proto.pbtxt.\
+#       """
+#   )
+#   parser.add_argument(
+#       '--image_file',
+#       type=str,
+#       default='',
+#       help='Absolute path to image file.'
+#   )
+#   parser.add_argument(
+#       '--num_top_predictions',
+#       type=int,
+#       default=5,
+#       help='Display this many predictions.'
+#   )
+#   FLAGS, unparsed = parser.parse_known_args()
   # tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
