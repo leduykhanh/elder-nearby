@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['localhost','127.0.0.1', '206.189.40.141']
 INSTALLED_APPS = [
     'corsheaders',
     'tweet.apps.TweetConfig',
+    'detector.apps.DetectorConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
