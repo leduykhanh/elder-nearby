@@ -1,5 +1,5 @@
 """
-WSGI config for zalora project.
+WSGI config for elders project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "zalora.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "elders.settings")
 
 application = get_wsgi_application()
