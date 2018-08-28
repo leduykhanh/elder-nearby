@@ -20,4 +20,5 @@ urlpatterns = [
     path('tweet/', include('tweet.urls')),
     path('detector/', include('detector.urls')),
     path('admin/', admin.site.urls),
+    path('rest-auth/', include('rest_auth.urls')),
 ]
