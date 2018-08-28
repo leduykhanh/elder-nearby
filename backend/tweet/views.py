@@ -35,4 +35,4 @@ def translate(request):
             target = target,
             translated_text = result['translatedText'])
     trans.save()
-    return JsonResponse({'data':result['translatedText']})
+    return JsonResponse({'data':result['translatedText'], language: result["detectedSourceLanguage"]})
