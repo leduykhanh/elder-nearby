@@ -129,3 +129,13 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
 )
+
+#Rest
+REST_FRAMEWORK = {
+'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework.authentication.TokenAuthentication',
+)
+}
+
+#Authorization
+ACCOUNT_LOGOUT_ON_GET = True
