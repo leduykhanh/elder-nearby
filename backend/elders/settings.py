@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1', '206.189.40.141']
 
+SITE_ID = 1
+
 
 # Application definition
 
@@ -35,8 +37,13 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_auth.registration',
+    'allauth',
+    'django.contrib.sites',
+    'allauth.account',
     'tweet.apps.TweetConfig',
     'detector.apps.DetectorConfig',
+    'eauth.apps.AuthConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -87,7 +94,9 @@ DATABASES = {
     }
 }
 
+#Auth models
 
+AUTH_USER_MODEL = 'eauth.User'
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -139,3 +148,4 @@ REST_FRAMEWORK = {
 
 #Authorization
 ACCOUNT_LOGOUT_ON_GET = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
