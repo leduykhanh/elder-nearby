@@ -23,8 +23,8 @@ https://cloud.google.com/translate/docs.
 
 import argparse
 import os
-# os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/leduykhanh/Downloads/Elders-d2d1e564d2d5.json'
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/Elders-d2d1e564d2d5.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/leduykhanh/Downloads/Elders-d2d1e564d2d5.json'
+# os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/Elders-d2d1e564d2d5.json'
 
 from google.cloud import translate
 import six

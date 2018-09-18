@@ -13,7 +13,11 @@ def index(request):
 
 def data(request):
     data_list = Message.objects.order_by('-time_added')[:10]
-    return JsonResponse({'data':MessageSerializzer(data_list, many=True).data})
+    t_list = []
+    for t in Translate.objects.all()[:10]:
+        text = str(t.user) + ' translated ' + t.translated_text
+        t_list.append(MessageSerializzer(Message(text=text)).data)
+    return JsonResponse({'data':MessageSerializzer(data_list, many=True).data + t_list})
 
 @csrf_exempt
 def add_message(request):
@@ -24,13 +28,19 @@ def add_message(request):
     data_list = Message.objects.order_by('-time_added')[:10]
     return JsonResponse({'data':MessageSerializzer(data_list, many=True).data})
 
-@csrf_exempt
 def translate(request):
     data = json.loads(request.body.decode('utf-8'))
+    user = request.user
+    if (user.balance == 0):
+        return JsonResponse({'message': 'No balance'}, status=400)
+    user.translates_done = user.translates_done + 1
+    user.balance = user.balance - 1
+    user.save()
     target = str(data.get("target"))
     text = str(data.get("text"))
     result = translate_text(target, text)
     trans = Translate(text=text,
+            user=user,
             language =result["detectedSourceLanguage"],
             target = target,
             translated_text = result['translatedText'])
