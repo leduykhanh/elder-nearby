@@ -16,7 +16,7 @@ def data(request):
     t_list = []
     for t in Translate.objects.all()[:10]:
         text = str(t.user) + ' translated ' + t.translated_text
-        t_list.append(MessageSerializzer(Message(text=text)).data)
+        t_list.append(MessageSerializzer(Message(text=text, time_added=t.time_added)).data)
     return JsonResponse({'data':MessageSerializzer(data_list, many=True).data + t_list})
 
 @csrf_exempt
@@ -32,7 +32,7 @@ def translate(request):
     data = json.loads(request.body.decode('utf-8'))
     user = request.user
     if (user.balance == 0):
-        return JsonResponse({'message': 'No balance'}, status=400)
+        return JsonResponse({'message': 'NO_BALANCE'}, status=400)
     user.translates_done = user.translates_done + 1
     user.balance = user.balance - 1
     user.save()
