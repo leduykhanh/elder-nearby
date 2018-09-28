@@ -19,7 +19,10 @@ from django.urls import path, include
 urlpatterns = [
     path('tweet/', include('tweet.urls')),
     path('detector/', include('detector.urls')),
+    path('eauth/', include('eauth.urls')),
     path('admin/', admin.site.urls),
     path('rest-auth/', include('rest_auth.urls')),
-    path('rest-auth/registration/', include('rest_auth.registration.urls'))
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),  # <--
+    path('auth/', include('rest_framework_social_oauth2.urls')),
 ]
