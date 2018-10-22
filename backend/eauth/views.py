@@ -38,7 +38,7 @@ def demo_login(request):
             "email": "demo@gmail.com",
             "eth_balance": 0,
             "tkx_balance": 0,
-            "swapped_timestamp": null,
+            "swapped_timestamp": None,
             "swapped_status": 0,
             "start_timestamp": 1526662800,
             "end_timestamp": 1526687999,
